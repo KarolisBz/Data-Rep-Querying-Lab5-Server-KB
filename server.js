@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const port = 4000;
+const path = require('path'); // getting path module to server files
 
 // error handling middlware allows us to catch server errors
 // at the top because is is an interpreted language
@@ -50,6 +51,14 @@ app.get('/api/movies', (req, res) => {
     // status code 200  means everything is okay
     res.status(200).json({ myMovies:movies }); // name-value array
 });
+
+// route index that serves the file
+app.get('/index', (req, res) => {
+    res.sendFile(path.join(__dirname, 'index.html'));
+});
+
+//Serve static assets: Set up middleware to serve all static files (CSS, JS, etc.) from a public directory.
+app.use(express.static('public'));
 
 // severs listens for a http request coming in
 app.listen(port, () => {
