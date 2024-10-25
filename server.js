@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const port = 4000;
 const path = require('path'); // getting path module to server files
+// body-parser middleware
+const bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({ extended: true }));
 
 // error handling middlware allows us to catch server errors
 // at the top because is is an interpreted language
@@ -64,6 +67,13 @@ app.use(express.static('public'));
 app.get('/name', (req, res) => {
     const firstname = req.query.firstname;
     const lastname = req.query.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
+});
+
+// handling POST request for /name. Data changed in body of data not url
+app.post('/name', (req, res) => {
+    const firstname = req.body.firstname;
+    const lastname = req.body.lastname;
     res.send(`Hello ${firstname} ${lastname}`);
 });
 
