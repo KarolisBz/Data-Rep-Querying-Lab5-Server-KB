@@ -63,14 +63,14 @@ app.get('/index', (req, res) => {
 //Serve static assets: Set up middleware to serve all static files (CSS, JS, etc.) from a public directory.
 app.use(express.static('public'));
 
-// handle get method from index.html
+// handle get method from index.html, data passed in URL
 app.get('/name', (req, res) => {
     const firstname = req.query.firstname;
     const lastname = req.query.lastname;
     res.send(`Hello ${firstname} ${lastname}`);
 });
 
-// handling POST request for /name. Data changed in body of data not url
+// handling POST request for /name. Data changed in body of data request not url
 app.post('/name', (req, res) => {
     const firstname = req.body.firstname;
     const lastname = req.body.lastname;
