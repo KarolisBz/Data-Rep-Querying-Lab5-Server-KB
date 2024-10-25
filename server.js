@@ -60,6 +60,13 @@ app.get('/index', (req, res) => {
 //Serve static assets: Set up middleware to serve all static files (CSS, JS, etc.) from a public directory.
 app.use(express.static('public'));
 
+// handle get method from index.html
+app.get('/name', (req, res) => {
+    const firstname = req.query.firstname;
+    const lastname = req.query.lastname;
+    res.send(`Hello ${firstname} ${lastname}`);
+});
+
 // severs listens for a http request coming in
 app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);
